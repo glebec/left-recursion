@@ -198,7 +198,7 @@ end = getEnd <|> pure Nothing where
     pure $ Just e
 ```
 
-Because `end` is recursive – the `expr` it parses itself consists of a new `start` and `end` – you can keep parsing an indefinite chain of subtractions, exactly analagous to a cons list. And just like the famous cons list, that chain of nested parses ends when you hit an empty case (`<|> pure Nothing`, when no `-` symbol is encountered).
+Because `end` is recursive – the `expr` it parses itself consists of a new `start` and `end` – you can keep parsing an indefinite chain of subtractions, exactly analogous to a cons list. And just like the famous cons list, that chain of nested parses ends when you hit an empty case (`<|> pure Nothing`, when no `-` symbol is encountered).
 
 Bubbling the information back up, our `expr` parser has to now react to both possibilities:
 
