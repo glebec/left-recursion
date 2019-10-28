@@ -128,7 +128,7 @@ At this point the issue becomes quite clear! Even though this grammar is a valid
 - features a production rule of the form `A = A ... | ...` which loops on itself immediately, or...
 - a set of production rules `A = B ... | ...`, `B = C ... | ...`, `C = A ... | ...` which loop around eventually.
 
-The key issue is that the loop is the _leftmost_ path the parser takes. Parsers are allowed to be recursive, so long as other possibilities are tried _first_. A parser cannot **unconditionally** recurse on itself – that is recursion without a base case, a classic programming error.
+Parsers are allowed to be recursive, so long as there exists the possibility for the parser to exit the loop. A parser cannot **unconditionally** recurse on itself – that is recursion without a base case, a classic programming error.
 
 ### Attempting a Fix
 
