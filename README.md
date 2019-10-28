@@ -155,14 +155,14 @@ The technique, which will work in most cases, is to identify the left-recursive 
 Before:
 
 ```ebnf
-EXPR  = GROUP | LIT | SUB
+EXPR  = SUB | GROUP | LIT
 SUB   = EXPR, "-", EXPR
 ...
 ```
 
 After:
 
-```
+```ebnf
 EXPR  = START, END
 START = GROUP | LIT
 END   = "-", EXPR | NOTHING
