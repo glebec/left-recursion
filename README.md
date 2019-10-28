@@ -205,6 +205,26 @@ Bubbling the information back up, our `expr` parser has to now react to both pos
 - Either no `end` was encountered (i.e., no `-` symbol), meaning this is NOT a subtraction expression; or,
 - An `end` was built, in case this WAS a subtraction expression.
 
+### Step-by-Step
+
+Let's trace through parsing the string "1" again:
+
+1. Hm, an `expr` begins with `start`
+2. The `start` is either a `group` (nope) or a `lit` (yep!)
+3. Continuing where we left off, the `expr` ends with `end`
+4. `end` either begins with "-" (nope) or it's nothing (yep!)
+5. So we have a successful `e1` expression, and `Nothing` for `e2`; guess we just return `e1` (which is `Lit 1`).
+
+What about parsing a subtraction like "1-1"?
+
+1. Hm, an `expr` begins with `start`
+2. The `start` is either a `group` (nope) or a `lit` (yep!)
+3. Continuing where we left off, the `expr` ends with `end`
+4. `end` either begins with "-" (yep!) or it's nothing (nope)
+5. Since we matched "-", `end` now continues on with a new `expr`
+6. RECURSE: The new `expr` follows the same path as "1" above
+7. We have a successful `e1` expression, and also a successful `e2` expression; time to return a `Sub e1 e2`.
+
 ## Conclusion
 
-This is meant as a Haskeller-approachable introduction to the _elimination of left recursion_ for recursive descent parsers. The full technique as explained [here](https://www.csd.uwo.ca/~moreno/CS447/Lectures/Syntax.html/node8.html) includes more examples. I hope you find it helpful, and please let me know if I've made any mistakes.
+This is meant as a Haskeller-approachable introduction to the _elimination of left recursion_ for recursive descent parsers. The full set of techniques as explained [here](https://www.csd.uwo.ca/~moreno/CS447/Lectures/Syntax.html/node8.html) includes additional examples and variations. I hope you find it helpful, and please let me know if I've made any mistakes.
