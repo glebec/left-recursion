@@ -57,7 +57,7 @@ lit = do
 main :: IO ()
 main = forM_
   [ "1"
-  , "2+3"
-  , "(3)+(2+((1)+0+5))+1"
+  , "2-3"
+  , "(3)-(2-((1)-0-5))-1"
   ]
   (print . parseString expr mempty)
