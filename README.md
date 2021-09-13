@@ -1,5 +1,7 @@
 # Elimination of Left Recursion
 
+> 👉 Note: common parsing libraries include combinators like [`chainl1`](https://hackage.haskell.org/package/parsec-3.1.14.0/docs/Text-Parsec.html#v:chainl1) which explicitly handle left-recursive grammars without needing to refactor the grammar as shown here. I recommend using such combinators where provided / feasible. Leaving this repo up for reference's sake.
+
 Parser combinators are expressive and easy to embed and reuse within an application. However, they implement _recursive descent_ parsing algorithms, which cannot parse _left-recursive_ grammars. Thankfully, there exists a simple technique to _eliminate_ left recursion in most grammars.
 
 These concepts are detailed [here](https://www.csd.uwo.ca/~moreno/CS447/Lectures/Syntax.html/node8.html) and elsewhere, but typically in the academic jargon of context-free grammars and parsing theory. In contrast, this codebase aims to demonstrate the problem and fix for those familiar with Haskell fundamentals.
